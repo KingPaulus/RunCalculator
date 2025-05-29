@@ -26,6 +26,7 @@ bin/
 .vscode/
 
 ### Mac OS ###
+*.DS_Store
 
 ### Idea folder ###
 .idea
