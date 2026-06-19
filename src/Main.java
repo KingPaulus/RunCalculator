@@ -48,7 +48,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Bitte Jahr eingeben (z. B. 2024 oder 2025): ");
+        System.out.print("Bitte Jahr eingeben (2024, 2025, 2026): ");
         int year = scanner.nextInt();
 
         String[][] runners;
@@ -58,6 +58,9 @@ public class Main {
                 break;
             case 2025:
                 runners = Data2025.getRunners();
+                break;
+            case 2026:
+                runners = Data2026.getRunners();
                 break;
             default:
                 System.out.println("Kein Datensatz für das Jahr " + year + " gefunden.");
