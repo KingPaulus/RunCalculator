@@ -48,16 +48,22 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Bitte Jahr eingeben (z. B. 2024 oder 2025): ");
+        System.out.print("Bitte Jahr eingeben (2024, 2025, 2026): ");
         int year = scanner.nextInt();
 
         String[][] runners;
         switch (year) {
             case 2024:
+                System.out.println("Firmenlauf Eibelstadt am 8. Mai 2024 - 6,5km");
                 runners = Data2024.getRunners();
                 break;
             case 2025:
+                System.out.println("Firmenlauf Eibelstadt am 28. Mai 2025 - 6,5km");
                 runners = Data2025.getRunners();
+                break;
+            case 2026:
+                System.out.println("3. WVV Energie Firmenlauf Würzburg am 18. Juni 2026 - 8,5km");
+                runners = Data2026.getRunners();
                 break;
             default:
                 System.out.println("Kein Datensatz für das Jahr " + year + " gefunden.");
