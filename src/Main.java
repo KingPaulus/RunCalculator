@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -29,7 +28,7 @@ public class Main {
      * @param results Ein 2D-Array, wobei jedes Element ein Array der Form {Name, Laufzeit} ist.
      * @param year
      */
-    public static void printSortedResults(String[][] results, int year) {
+    public static void printSortedResults(String[][] results, String year) {
         // Sortieren des Arrays basierend auf der umgewandelten Laufzeit in Sekunden
         Arrays.sort(results, (a, b) -> Integer.compare(convertTimeToSeconds(a[1]), convertTimeToSeconds(b[1])));
 
@@ -41,6 +40,19 @@ public class Main {
         }
     }
 
+    public static void printAllParticipants() {
+        Map<Integer, String[][]> data = new HashMap<>();
+
+        data.put(2024, Data2024.getRunners());
+        data.put(2025, Data2025.getRunners());
+        data.put(2026, Data2026.getRunners());
+
+        Map<String, Set<Integer>> result =
+                RunnerAnalyzer.analyzeRunners(data);
+
+        RunnerAnalyzer.printResult(result);
+    }
+
     /**
      * Main Methode zum starten der Anwendung
      *
@@ -49,27 +61,33 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Bitte Jahr eingeben (2024, 2025, 2026): ");
-        int year = scanner.nextInt();
+        String input = scanner.next();
 
         String[][] runners;
-        switch (year) {
-            case 2024:
+        switch (input) {
+            case "2024":
                 System.out.println("Firmenlauf Eibelstadt am 8. Mai 2024 - 6,5km");
                 runners = Data2024.getRunners();
                 break;
-            case 2025:
+            case "2025":
                 System.out.println("Firmenlauf Eibelstadt am 28. Mai 2025 - 6,5km");
                 runners = Data2025.getRunners();
                 break;
-            case 2026:
+            case "2026":
                 System.out.println("3. WVV Energie Firmenlauf Würzburg am 18. Juni 2026 - 8,5km");
                 runners = Data2026.getRunners();
                 break;
+            case "Runners":
+                printAllParticipants();
+                runners = new String[][]{new String[]{"Merget Paul"}, new String[]{"0:00:00"}};
+                break;
             default:
-                System.out.println("Kein Datensatz für das Jahr " + year + " gefunden.");
+                System.out.println("Kein Datensatz für das Jahr " + input + " gefunden.");
                 return;
         }
 
-        printSortedResults(runners, year);
+        if(!"Runners".equals(input)) {
+            printSortedResults(runners, input);
+        }
     }
 }
